@@ -12,7 +12,7 @@ using ProjetoFinalAtos.Data;
 namespace ProjetoFinalAtos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230627171143_ProjetoFinalAtos")]
+    [Migration("20230704130540_ProjetoFinalAtos")]
     partial class ProjetoFinalAtos
     {
         /// <inheritdoc />
@@ -61,25 +61,6 @@ namespace ProjetoFinalAtos.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ProjetoFinalAtos.Models.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Services");
-                });
-
             modelBuilder.Entity("ProjetoFinalAtos.Models.ServiceCategories", b =>
                 {
                     b.Property<int>("Id")
@@ -88,21 +69,22 @@ namespace ProjetoFinalAtos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ServicesCategories");
+                    b.ToTable("ServiceCategories");
                 });
 
-            modelBuilder.Entity("ProjetoFinalAtos.Models.ServiceProvider", b =>
+            modelBuilder.Entity("ProjetoFinalAtos.Models.ServiceProviders", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,7 +95,7 @@ namespace ProjetoFinalAtos.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Category")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -144,15 +126,49 @@ namespace ProjetoFinalAtos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Service")
-                        .HasColumnType("int");
-
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ServiceProviders");
+                });
+
+            modelBuilder.Entity("ProjetoFinalAtos.Models.Services", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("ProjetoFinalAtos.Models.Services", b =>
+                {
+                    b.HasOne("ProjetoFinalAtos.Models.ServiceCategories", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

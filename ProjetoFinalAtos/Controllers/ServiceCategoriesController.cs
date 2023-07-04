@@ -10,7 +10,7 @@ namespace ProjetoFinalAtos.Controllers {
             _context = context;
         }
         public IActionResult Index() {
-            List<ServiceCategories> categories = _context.ServicesCategories.ToList();
+            List<ServiceCategories> categories = _context.ServiceCategories.ToList();
             return View(categories);
         }
     }

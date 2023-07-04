@@ -1,0 +1,181 @@
+﻿@using ProjetoFinalAtos.ViewModels;
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h2>Registre-se no Work</h2>
+            <p class="lead">Preencha os espaços abaixo com suas informações para realizar o seu cadastro como prestador de serviços.</p>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Informações Pessoais</h4>
+                <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label asp-for="Name" class="form-label">Nome Completo</label>
+                            <input asp-for="Name" class="form-control" required>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Nome é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Cpf" class="form-label">CPF</label>
+                            <input asp-for="Cpf" class="form-control" required>
+                            <span asp-validation-for="Cpf" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Nome é obrigatório.
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label asp-for="BirthDate" class="form-label">Data de Nascimento</label>
+                            <input asp-for="BirthDate" type="date" class="form-control"/>
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Data de nascimento é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="Phone" class="form-label">Telefone</label>
+                            <input asp-for="Phone" type="tel" class="form-control" required>
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Telefone é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="nome@exemplo.com" required>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Email é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="CategoryId" class="form-label">Categoria do Serviço</label>
+                            <select asp-for="CategoryId" class="form-control" id="CategoryId" name="CategoryId" required>
+                                <option value="">Escolha...</option>
+                                @foreach (var category in Model.Categories) {
+                                    <option value="@category.Value">@category.Text</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Selecionar a categoria de serviço é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="ServiceId" class="form-label">Serviço</label>
+                            <select asp-for="ServiceId" class="form-control" id="ServiceId" name="ServiceId" required>
+                                <option value="">Escolha...</option>
+                                @foreach (var service in Model.Services) {
+                                    <option value="@service.Value">@service.Text</option>
+                                }
+                            </select>                
+                            <span asp-validation-for="ServiceId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Selecionar o serviço é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="City" for="address" class="form-label">Cidade</label>
+                            <input asp-for="City" type="text" class="form-control" required>
+                            <span asp-validation-for="City" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Por favor informe a cidade em que você reside.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="State" class="form-label">Estado (UF)</label>
+                            <input asp-for="State" type="text" class="form-control" placeholder="MG, SP, RJ..." required>
+                            <span asp-validation-for="State" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Por favor informe o estado em que você reside.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="District" class="form-label">Bairro</label>
+                            <input asp-for="District" type="text" class="form-control">
+                            <span asp-validation-for="District" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Por favor informe o bairro em que você reside.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="Password" for="address" class="form-label">Senha</label>
+                            <input asp-for="Password" type="password" class="form-control" required>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Digite uma senha.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label asp-for="ConfirmPassword" for="address" class="form-label">Confirmar Senha</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" required>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                As duas senhas devem ser iguais.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button asp-area="" asp-controller="Register" asp-action="Create" class="w-100 btn btn-primary btn-lg" type="submit">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    @*<script>
+        function getServicesByCategory() {
+            var categoryId = document.getElementById("CategoryId").value;
+
+            // Chamada AJAX ao servidor
+            $.ajax({
+                url: "/Home/GetServicesByCategory",
+                type: "POST",
+                data: { categoryId: categoryId },
+                success: function (data) {
+                    // Atualize a lista de serviços com os serviços retornados pelo servidor
+                    var servicesSelect = document.getElementById("ServiceId");
+                    servicesSelect.innerHTML = "";
+
+                    // Adicione as opções de serviço à lista
+                    data.forEach(function (service) {
+                        var option = document.createElement("option");
+                        option.value = service.value;
+                        option.text = service.text;
+                        servicesSelect.appendChild(option);
+                    });
+                },
+                error: function () {
+                    alert("Ocorreu um erro ao obter os serviços.");
+                }
+            });
+        }
+*@
+    </script>
+    @*<footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2023 Work</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+        </ul>
+    </footer>*@
+</div>

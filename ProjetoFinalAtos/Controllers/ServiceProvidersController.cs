@@ -35,14 +35,14 @@ namespace ProjetoFinalAtos.Controllers
                 return NotFound();
             }
 
-            var serviceProvider = await _context.ServiceProviders
+            var serviceProviders = await _context.ServiceProviders
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (serviceProvider == null)
+            if (serviceProviders == null)
             {
                 return NotFound();
             }
 
-            return View(serviceProvider);
+            return View(serviceProviders);
         }
 
         // GET: ServiceProviders/Create
@@ -56,15 +56,15 @@ namespace ProjetoFinalAtos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Cpf,BirthDate,Phone,Email,ServiceId,Category,Service,Password,City,District")] Models.ServiceProvider serviceProvider)
+        public async Task<IActionResult> Create([Bind("Id,Name,Cpf,BirthDate,Phone,Email,ServiceId,CategoryId,Password,State,City,District")] ServiceProviders serviceProviders)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(serviceProvider);
+                _context.Add(serviceProviders);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(serviceProvider);
+            return View(serviceProviders);
         }
 
         // GET: ServiceProviders/Edit/5
@@ -75,12 +75,12 @@ namespace ProjetoFinalAtos.Controllers
                 return NotFound();
             }
 
-            var serviceProvider = await _context.ServiceProviders.FindAsync(id);
-            if (serviceProvider == null)
+            var serviceProviders = await _context.ServiceProviders.FindAsync(id);
+            if (serviceProviders == null)
             {
                 return NotFound();
             }
-            return View(serviceProvider);
+            return View(serviceProviders);
         }
 
         // POST: ServiceProviders/Edit/5
@@ -88,9 +88,9 @@ namespace ProjetoFinalAtos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Cpf,BirthDate,Phone,Email,ServiceId,Category,Service,Password,City,District")] Models.ServiceProvider serviceProvider)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Cpf,BirthDate,Phone,Email,ServiceId,CategoryId,Password,State,City,District")] ServiceProviders serviceProviders)
         {
-            if (id != serviceProvider.Id)
+            if (id != serviceProviders.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace ProjetoFinalAtos.Controllers
             {
                 try
                 {
-                    _context.Update(serviceProvider);
+                    _context.Update(serviceProviders);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServiceProviderExists(serviceProvider.Id))
+                    if (!ServiceProvidersExists(serviceProviders.Id))
                     {
                         return NotFound();
                     }
@@ -115,7 +115,7 @@ namespace ProjetoFinalAtos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(serviceProvider);
+            return View(serviceProviders);
         }
 
         // GET: ServiceProviders/Delete/5
@@ -126,14 +126,14 @@ namespace ProjetoFinalAtos.Controllers
                 return NotFound();
             }
 
-            var serviceProvider = await _context.ServiceProviders
+            var serviceProviders = await _context.ServiceProviders
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (serviceProvider == null)
+            if (serviceProviders == null)
             {
                 return NotFound();
             }
 
-            return View(serviceProvider);
+            return View(serviceProviders);
         }
 
         // POST: ServiceProviders/Delete/5
@@ -145,17 +145,17 @@ namespace ProjetoFinalAtos.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.ServiceProviders'  is null.");
             }
-            var serviceProvider = await _context.ServiceProviders.FindAsync(id);
-            if (serviceProvider != null)
+            var serviceProviders = await _context.ServiceProviders.FindAsync(id);
+            if (serviceProviders != null)
             {
-                _context.ServiceProviders.Remove(serviceProvider);
+                _context.ServiceProviders.Remove(serviceProviders);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ServiceProviderExists(int id)
+        private bool ServiceProvidersExists(int id)
         {
           return (_context.ServiceProviders?.Any(e => e.Id == id)).GetValueOrDefault();
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetoFinalAtos.Models.ServiceProvider>
+﻿@model IEnumerable<ProjetoFinalAtos.Models.ServiceProviders>
 
 @{
     ViewData["Title"] = "Index";
@@ -31,13 +31,13 @@
                 @Html.DisplayNameFor(model => model.ServiceId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service)
+                @Html.DisplayNameFor(model => model.CategoryId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.City)
@@ -70,13 +70,13 @@
                 @Html.DisplayFor(modelItem => item.ServiceId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Service)
+                @Html.DisplayFor(modelItem => item.CategoryId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City)

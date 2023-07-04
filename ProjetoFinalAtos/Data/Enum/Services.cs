@@ -37,7 +37,6 @@
         // Pet
         Veterinarian,
         PetGroomer,
-        PetWalker,
         PetSitter
     }
 }

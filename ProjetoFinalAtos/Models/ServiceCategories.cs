@@ -6,8 +6,8 @@ namespace ProjetoFinalAtos.Models {
         [Key]
         public int Id { get; set; }
         [Required]
-        public ServiceCategory Category { get; set; }
-        public string? Image { get; set; }
+        public string Name { get; set; }
+        public string? Image { get; set; }  
         public string? Description { get; set; }
     }
 }
