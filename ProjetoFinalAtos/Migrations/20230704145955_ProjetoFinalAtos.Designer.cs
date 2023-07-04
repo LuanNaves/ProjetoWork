@@ -12,7 +12,7 @@ using ProjetoFinalAtos.Data;
 namespace ProjetoFinalAtos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230704130540_ProjetoFinalAtos")]
+    [Migration("20230704145955_ProjetoFinalAtos")]
     partial class ProjetoFinalAtos
     {
         /// <inheritdoc />

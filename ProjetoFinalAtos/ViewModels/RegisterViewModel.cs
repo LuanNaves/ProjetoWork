@@ -38,6 +38,7 @@ namespace ProjetoFinalAtos.ViewModels {
         [Required]
         public int CategoryId { get; set; } // Para selecionar a Category correspondente
         public List<SelectListItem> Categories { get; set; } // Para exibir as opções de Categories
+
     }
 }
 
